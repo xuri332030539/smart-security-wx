@@ -11,7 +11,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication(scanBasePackageClasses = {
         CommonCoreConfig.class,
-//        CommonRedisConfig.class,
+        CommonRedisConfig.class,
         CommonMysqlConfig.class,
         SmartSecurityApplication.class
 })

@@ -32,18 +32,10 @@
             <property name="endingDelimiter" value="`"/>
         </plugin>
 
-<!--        &lt;!&ndash;数据库链接URL，用户名、密码 &ndash;&gt;-->
-<!--        <jdbcConnection-->
-<!--                driverClass="com.mysql.jdbc.Driver"-->
-<!--                connectionURL="jdbc:mysql://101.132.155.44:3306/smart_security_test?tinyInt1isBit=false"-->
-<!--                userId="smart_scy_test"-->
-<!--                password="RrwXf8k2ODyTerO0">-->
-<!--        </jdbcConnection>-->
-
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://121.199.8.188:3306/vue?tinyInt1isBit=false"
+                connectionURL="jdbc:mysql://121.199.8.188:3306/wxqiandao?tinyInt1isBit=false"
                 userId="admin"
                 password="Admin@123456">
         </jdbcConnection>
@@ -65,7 +57,15 @@
                 type="XMLMAPPER"/>
 
 
-        <table tableName="product">
+        <table tableName="qd_meeting">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="qd_meeting_user">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <table tableName="qd_user">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>
