@@ -7,7 +7,7 @@
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="initiator" jdbcType="VARCHAR" property="initiator" />
+    <result column="initiator_id" jdbcType="BIGINT" property="initiatorId" />
     <result column="start_date" jdbcType="TIMESTAMP" property="startDate" />
     <result column="state" jdbcType="CHAR" property="state" />
     <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />

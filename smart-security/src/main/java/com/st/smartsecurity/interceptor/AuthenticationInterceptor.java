@@ -6,39 +6,43 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.qs.common.core.exception.BusinessException;
 import com.st.smartsecurity.annotation.PassToken;
+import com.st.smartsecurity.annotation.UserLoginToken;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * 拦截器
  *
- * @author leijs
- * @date 2019/10/21
+ * @author xuri
+ * @date 2019/12/17
  */
 public class AuthenticationInterceptor implements HandlerInterceptor {
-
+	@Resource
+	private HttpServletRequest request;
 
 
 	@Override
 	public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object object) throws Exception {
-
-//		httpServletResponse.setHeader("Access-Control-Allow-Origin", "http://212.64.22.136");
-		httpServletResponse.setHeader("Access-Control-Allow-Origin", "http://localhost:9528");
+		//跨域问题
+		httpServletResponse.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 		httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, GET");
 		httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
 		httpServletResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 		httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
 
 
-//		String token = httpServletRequest.getHeader("Authorization");// 从 http 请求头中取出 token
-//		System.out.println("token：" + token);
+		String token = httpServletRequest.getHeader("Authorization");// 从 http 请求头中取出 token
 		// 如果不是映射到方法直接通过httpServletResponse
 		if (!(object instanceof HandlerMethod)) {
 			return true;
@@ -52,50 +56,29 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 				return true;
 			}
 		}
-		return false;
-		//检查有没有需要用户权限的注解
-//		if (method.isAnnotationPresent(UserLoginToken.class)) {
-//			System.out.println("有需要用户权限的注解");
-//			UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
-//			if (userLoginToken.required()) {
-		// 执行认证
-//		if (token == null) {
-//			JSONObject jsonObj = new JSONObject();
-//			jsonObj.put("code", "401");
-//			jsonObj.put("msg", "请先登录再进行操作");
-//			throw new RuntimeException(jsonObj.toJSONString());
-//		}
-//		// 获取 token 中的 user id
-//		String userId;
-//		try {
-//			userId = JWT.decode(token).getAudience().get(0);
-//		} catch (JWTDecodeException j) {
-//
-//			JSONObject jsonObj = new JSONObject();
-//			jsonObj.put("code", "402");
-//			jsonObj.put("msg", "用户信息与Token不匹配，请重新登录");
-//			throw new RuntimeException(jsonObj.toJSONString());
-//		}
-//		SysUserDTO dto = managementService.getSysUserById(userId);
-//		if (dto.getId() == null) {
-//			JSONObject jsonObj = new JSONObject();
-//			jsonObj.put("code", "403");
-//			jsonObj.put("msg", "用户不存在，请重新登录");
-//			throw new RuntimeException(jsonObj.toJSONString());
-//		}
-//		// 验证 token
-//		JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(dto.getPassword())).build();
-//		try {
-//			jwtVerifier.verify(token);
-//		} catch (JWTVerificationException e) {
-//			JSONObject jsonObj = new JSONObject();
-//			jsonObj.put("code", "404");
-//			jsonObj.put("msg", "Token过期或不匹配，请重新登录");
-//			throw new RuntimeException(jsonObj.toJSONString());
-//		}
-//		return true;
-//
+
+			//执行认证
+			if (StringUtils.isEmpty(token)) {
+				throw new BusinessException(201, "token为空，请输入token");
+			}
+			// 比较token
+			if (StringUtils.isNotEmpty(token)){
+//				System.out.println(JWT.decode(token).getExpiresAt());
+//				System.out.println(new Date());
+//				System.out.println(request.getSession().getAttribute("token"+JWT.decode(token).getAudience().get(0)).toString());
+//				System.out.println(token);
+				if (JWT.decode(token).getExpiresAt().before(new Date())||request.getSession().getAttribute("token"+JWT.decode(token).getAudience().get(0))==null){
+					throw new BusinessException(202, "token过期，请重新登录");
+				}
+				if (request.getSession().getAttribute("token"+JWT.decode(token).getAudience().get(0)).toString().equals(token)){
+					return true;
+				}else{
+					throw new BusinessException(203, "token错误，请重新登录");
+				}
+			}
+		return true;
 	}
+
 
 	@Override
 	public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {

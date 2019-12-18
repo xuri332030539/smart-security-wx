@@ -10,14 +10,14 @@ public class QdMeeting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "`name`")
-    private String name;
-
     /**
      * 发起人
      */
-    @Column(name = "`initiator`")
-    private String initiator;
+    @Column(name = "`name`")
+    private String name;
+
+    @Column(name = "`initiator_id`")
+    private Long initiatorId;
 
     @Column(name = "`start_date`")
     private Date startDate;
@@ -58,35 +58,35 @@ public class QdMeeting {
     }
 
     /**
-     * @return name
+     * 获取发起人
+     *
+     * @return name - 发起人
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name
+     * 设置发起人
+     *
+     * @param name 发起人
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * 获取发起人
-     *
-     * @return initiator - 发起人
+     * @return initiator_id
      */
-    public String getInitiator() {
-        return initiator;
+    public Long getInitiatorId() {
+        return initiatorId;
     }
 
     /**
-     * 设置发起人
-     *
-     * @param initiator 发起人
+     * @param initiatorId
      */
-    public void setInitiator(String initiator) {
-        this.initiator = initiator;
+    public void setInitiatorId(Long initiatorId) {
+        this.initiatorId = initiatorId;
     }
 
     /**

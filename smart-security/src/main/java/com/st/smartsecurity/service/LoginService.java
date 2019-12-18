@@ -1,7 +1,7 @@
 package com.st.smartsecurity.service;
 
-import com.st.smartsecurity.pojo.po.QdUser;
+import com.st.smartsecurity.pojo.dto.QdUserDTO;
 
 public interface LoginService {
-    QdUser login(String name, int workNumber, String openId);
+    QdUserDTO login(String name, Integer workNumber, String openId);
 }
