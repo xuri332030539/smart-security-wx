@@ -1,4 +1,4 @@
-package com.st.smartsecurity.service.Impl;
+package com.st.smartsecurity.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.google.common.base.Preconditions;

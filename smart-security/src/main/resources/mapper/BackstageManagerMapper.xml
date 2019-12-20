@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.st.smartsecurity.mapper.BackstageManagerMapper">
+  <resultMap id="BaseResultMap" type="com.st.smartsecurity.pojo.po.BackstageManager">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="version_date" jdbcType="TIMESTAMP" property="versionDate" />
+    <result column="state" jdbcType="CHAR" property="state" />
+  </resultMap>
+</mapper>

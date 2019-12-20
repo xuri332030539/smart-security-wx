@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.st.smartsecurity.mapper.SchoolMapper">
+  <resultMap id="BaseResultMap" type="com.st.smartsecurity.pojo.po.School">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="state" jdbcType="CHAR" property="state" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="version_date" jdbcType="TIMESTAMP" property="versionDate" />
+  </resultMap>
+</mapper>

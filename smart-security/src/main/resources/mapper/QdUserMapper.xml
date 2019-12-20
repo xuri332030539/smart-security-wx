@@ -16,5 +16,8 @@
     <result column="version_date" jdbcType="TIMESTAMP" property="versionDate" />
     <result column="nickName" jdbcType="VARCHAR" property="nickname" />
     <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="school_id" jdbcType="BIGINT" property="schoolId" />
+    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
   </resultMap>
 </mapper>

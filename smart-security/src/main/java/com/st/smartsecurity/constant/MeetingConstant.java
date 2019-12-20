@@ -14,5 +14,5 @@ public class MeetingConstant {
     /**
      * 删除状态
      */
-    public static final String STATE_DELETE = "N";
+    public static final String STATE_DELETE = "D";
 }

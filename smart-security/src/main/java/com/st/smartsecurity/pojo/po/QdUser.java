@@ -49,6 +49,21 @@ public class QdUser {
     @Column(name = "`gender`")
     private Integer gender;
 
+    @Column(name = "`school_id`")
+    private Long schoolId;
+
+    /**
+     * 部门id
+     */
+    @Column(name = "`department_id`")
+    private Long departmentId;
+
+    /**
+     * 职务
+     */
+    @Column(name = "`position`")
+    private String position;
+
     /**
      * @return id
      */
@@ -213,5 +228,55 @@ public class QdUser {
      */
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    /**
+     * @return school_id
+     */
+    public Long getSchoolId() {
+        return schoolId;
+    }
+
+    /**
+     * @param schoolId
+     */
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    /**
+     * 获取部门id
+     *
+     * @return department_id - 部门id
+     */
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    /**
+     * 设置部门id
+     *
+     * @param departmentId 部门id
+     */
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    /**
+     * 获取职务
+     *
+     * @return position - 职务
+     */
+    public String getPosition() {
+        return position;
+    }
+
+    /**
+     * 设置职务
+     *
+     * @param position 职务
+     */
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
